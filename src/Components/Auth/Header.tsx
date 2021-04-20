@@ -1,13 +1,17 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { path } from "../../Routes";
+
+interface IProps {
+  text: string;
+  link: string;
+}
 
 const SHeader = styled.div`
   background-color: transparent;
   margin-top: 20px;
   position: fixed;
   width: 100%;
-  z-index: -999;
   top: 0;
 `;
 
@@ -42,14 +46,14 @@ const SignUpText = styled.span`
   font-weight: bold;
 `;
 
-export default function Header() {
+export default function Header({ text, link }: IProps) {
   return (
     <SHeader>
       <HeaderContents>
         <WatchaTitle>WATCHA</WatchaTitle>
         <SignUpWrapper>
-          <Link to={path.signUp}>
-            <SignUpText>회원가입</SignUpText>
+          <Link to={link}>
+            <SignUpText>{text}</SignUpText>
           </Link>
         </SignUpWrapper>
       </HeaderContents>
