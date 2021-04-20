@@ -11,6 +11,8 @@ const SubmitBtn = styled.button`
   color: white;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.7s ease-in-out;
+  opacity: ${(props) => (props.disabled ? 0.3 : 1)};
 `;
 
 export default SubmitBtn;
