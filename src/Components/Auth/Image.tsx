@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Image = styled.img`
+const SImage = styled.img`
   width: 100%;
   height: 100vh;
   z-index: -1000;
@@ -10,4 +10,10 @@ const Image = styled.img`
   filter: brightness(0.4);
 `;
 
-export default Image;
+interface IProps {
+  src: string;
+}
+
+export default function Image({ src }: IProps) {
+  return <SImage src={src} />;
+}
