@@ -2,6 +2,10 @@ import { useState } from "react";
 import { FiCircle } from "react-icons/fi";
 import { BiCheckCircle } from "react-icons/bi";
 import styled from "styled-components";
+import { data } from "./Data";
+import { RiTodoFill } from "react-icons/ri";
+import { checkDocument } from "@apollo/client/utilities";
+import { couldStartTrivia } from "typescript";
 
 const List = styled.div`
   color: ${(props) => props.theme.silverColor};
@@ -28,44 +32,38 @@ const CheckCircle = styled(BiCheckCircle)`
 `;
 
 export default function CheckList() {
-  const [list, setList] = useState([
-    { title: "만 14세 이상입니다", id: 1, check: false },
-    {
-      title: "왓챠피디아 서비스 이용약관에 동의합니다 (필수)",
-      id: 2,
-      check: false,
-    },
-    { title: "왓챠 서비스 이용약관에 동의합니다 (필수)", id: 3, check: false },
-    {
-      title: "개인정보 수집 및 이용에 대한 안내에 동의합니다 (필수)",
-      id: 4,
-      check: false,
-    },
-    {
-      title: "신작 알림 이벤트 정보 수신에 동의합니다 (선택)",
-      id: 5,
-      check: false,
-    },
-  ]);
+  const [list, setList] = useState(data);
 
-  const toggleCheck = (id: number) => {
+  const soloClick = (id: number) => {
+    setList(list.map((v) => (v.id === id ? { ...v, check: !v.check } : v)));
+  };
+
+  const allClick = () => {
+    let allchecked = Boolean();
     setList(
-      list.map((todo) =>
-        todo.id === id ? { ...todo, check: !todo.check } : todo
-      )
+      list.map((item, index) => {
+        if (index === 0) {
+          allchecked = item.check;
+        }
+        return { ...item, check: !allchecked };
+      })
     );
   };
 
   return (
     <>
-      {list.map((v) => (
-        <List key={v.id}>
-          <Item onClick={() => toggleCheck(v.id)}>
-            {v.check ? <CheckCircle size="15" /> : <FiCircle size="15" />}
-            <Value>{v.title}</Value>
-          </Item>
-        </List>
-      ))}
+      {list.map((item, index) => {
+        return (
+          <List key={item.id}>
+            <Item
+              onClick={() => (index === 0 ? allClick() : soloClick(item.id))}
+            >
+              {item.check ? <CheckCircle /> : <FiCircle />}
+              <Value>{item.title}</Value>
+            </Item>
+          </List>
+        );
+      })}
     </>
   );
 }
