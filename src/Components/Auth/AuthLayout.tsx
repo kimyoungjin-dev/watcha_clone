@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "./Login/Header";
-import Image from "./Login/Image";
 
 interface IProps {
   children: React.ReactNode;
@@ -24,8 +22,6 @@ const Wrapper = styled.div`
 export default function AuthLayout({ children }: IProps) {
   return (
     <Container>
-      <Header />
-      <Image src="https://cdn.dribbble.com/users/4597873/screenshots/15118299/media/86f17667edbf10a2560a6eef2e60c454.png?compress=1&resize=1600x1200" />
       <Wrapper>{children}</Wrapper>
     </Container>
   );
