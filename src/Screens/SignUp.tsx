@@ -2,42 +2,14 @@ import Input from "../Components/Auth/Input";
 import Form from "../Components/Auth/Form";
 import SubmitBtn from "../Components/Auth/SubmitBtn";
 import { LoginHeader } from "../Components/Auth/Login/Remainder";
-import styled from "styled-components";
 import { path } from "../Components/Routes";
 import Header from "../Components/Auth/Header";
 import CheckList from "../Components/Auth/SignUp/CheckList";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../Components/Auth/ErrorMessage";
-
-const Container = styled.div`
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: 320px;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 100vh;
-  z-index: -1000;
-  position: absolute;
-  top: 0;
-  left: 0;
-  filter: brightness(0.4);
-`;
-
-const Payment = styled.span`
-  color: white;
-  margin-top: 10px;
-  display: block;
-`;
+import AuthLayout from "../Components/Auth/AuthLayout";
+import Image from "../Components/Auth/Image";
+import { Payment } from "../Components/Auth/SignUp/Remainder";
 
 interface IForm {
   userName: string;
@@ -59,15 +31,16 @@ export default function Login() {
   };
 
   return (
-    <Container>
+    <>
       <Image src="https://cdn.dribbble.com/users/4597873/screenshots/15118299/media/86f17667edbf10a2560a6eef2e60c454.png?compress=1&resize=1600x1200" />
       <Header link={path.home} text="로그인" />
-      <Wrapper>
+      <AuthLayout>
         <LoginHeader>
           <span>로그인</span>
         </LoginHeader>
         <Form onSubmit={handleSubmit(onValid)}>
           <Input
+            id="firstInput"
             {...register("userName", {
               required: true,
               minLength: {
@@ -78,6 +51,7 @@ export default function Login() {
             type="text"
             placeholder="이름(2자 이상)"
           />
+
           <Input
             type="email"
             placeholder="이메일(example@gmail.com)"
@@ -91,6 +65,7 @@ export default function Login() {
             })}
           />
           <Input
+            id="lastInput"
             type="password"
             placeholder="영문, 숫자 특문 중 2개 조합 10자 이상"
             {...register("password", {
@@ -101,6 +76,7 @@ export default function Login() {
               },
             })}
           />
+
           <ErrorMessage text={errors?.userName?.message} />
           <ErrorMessage text={errors?.email?.message} />
           <ErrorMessage text={errors?.password?.message} />
@@ -110,7 +86,7 @@ export default function Login() {
           계정 생성하기
         </SubmitBtn>
         <Payment>결제 정보요? 충분히 둘러보시고 입력해도 늦지 않아요</Payment>
-      </Wrapper>
-    </Container>
+      </AuthLayout>
+    </>
   );
 }
