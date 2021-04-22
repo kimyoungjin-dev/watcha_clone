@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 const Input = styled.input`
+  box-sizing: border-box;
   width: 100%;
-  background-color: white;
   padding: 15px 0px;
   padding-left: 5px;
+  background-color: white;
 
   &::placeholder {
     color: ${(props) => props.theme.silverColor};

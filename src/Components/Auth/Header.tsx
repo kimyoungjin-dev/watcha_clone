@@ -13,6 +13,7 @@ const SHeader = styled.div`
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 999;
 `;
 
 const HeaderContents = styled.div`
