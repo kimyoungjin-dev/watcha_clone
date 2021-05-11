@@ -7,13 +7,13 @@ export const LoginHeader = styled.div`
   margin-bottom: 18px;
   align-items: center;
   &:first-child {
-    color: white;
+    color: ${(props) => props.theme.fontColor};
     font-weight: bold;
   }
 `;
 
 export const ForgotPassword = styled.span`
-  color: ${(props) => props.theme.silverColor};
+  color: ${(props) => props.theme.fontColor};
   font-size: 12px;
   cursor: pointer;
 `;
@@ -28,10 +28,13 @@ export const Separator = styled.div`
 `;
 
 export const OtherLogin = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 5px;
   margin: 18px 0px;
   span {
     font-size: 12px;
-    color: silver;
+    color: ${(props) => props.theme.fontColor};
   }
 `;
 
@@ -41,5 +44,10 @@ export const IconBox = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 40px;
-  cursor: pointer;
+  & :nth-child(3) {
+    color: ${(props) => props.theme.fontColor};
+  }
+  & :nth-child(5) {
+    color: ${(props) => props.theme.fontColor};
+  }
 `;

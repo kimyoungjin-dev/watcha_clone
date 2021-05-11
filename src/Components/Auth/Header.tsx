@@ -34,11 +34,12 @@ const SignUpWrapper = styled.div`
   border-radius: 30px;
   width: 84px;
   height: 32px;
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.fontColor};
 `;
 
 const SignUpText = styled.span`
