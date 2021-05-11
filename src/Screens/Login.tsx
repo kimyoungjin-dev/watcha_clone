@@ -23,11 +23,19 @@ import AuthLayout from "../Components/Auth/AuthLayout";
 import Header from "../Components/Auth/Header";
 import { path } from "../Components/Routes";
 import Image from "../Components/Auth/Image";
+import { useReactiveVar } from "@apollo/client";
+import { darkVar, darkChange, lightChange } from "../Components/apollo";
+import { BsSun, BsMoon } from "react-icons/bs";
+import styled from "styled-components";
 
 interface IForm {
   email: string;
   password: string;
 }
+
+const DarkModeBox = styled.div`
+  cursor: pointer;
+`;
 
 export default function Login() {
   const {
@@ -39,10 +47,10 @@ export default function Login() {
   });
 
   const onValid = (data: IForm) => console.log(data);
-
+  const darkmode = useReactiveVar(darkVar);
+  console.log(darkmode);
   return (
     <>
-      <Image src="https://cdn.dribbble.com/users/730703/screenshots/13387806/media/1306ce92b7fc2cf5832b8ebe106c5a21.jpg?compress=1&resize=1600x1200" />
       <Header text="회원가입" link={path.signUp} />
       <AuthLayout>
         <LoginHeader>
@@ -52,7 +60,7 @@ export default function Login() {
         <Form onSubmit={handleSubmit(onValid)}>
           <Input
             {...register("email", {
-              required: true,
+              required: "아이디 및 이메일은 필수 입력 조건입니다.",
               validate: (currentValue) => currentValue.includes("@"),
             })}
             type="email"
@@ -65,10 +73,15 @@ export default function Login() {
             type="password"
             placeholder="비밀번호"
             {...register("password", {
-              required: true,
+              required: "비밀번호는 필수 입력 조건입니다.",
               minLength: {
-                value: 10,
-                message: "비밀번호는 10글자 이상이어야 합니다.",
+                value: 5,
+                message: "비밀번호는 최소 5글자 이상이어야 합니다.",
+              },
+
+              maxLength: {
+                value: 15,
+                message: "비밀번호는 최대 15글자 미만이어야 합니다.",
               },
             })}
           />
@@ -86,13 +99,17 @@ export default function Login() {
 
         <OtherLogin>
           <span>다른 방법으로 로그인하기</span>
+          <DarkModeBox onClick={darkmode ? lightChange : darkChange}>
+            <span>{darkmode ? "화이트모드" : "다크모드"}</span>
+            <span> {darkmode ? <BsSun /> : <BsMoon />}</span>
+          </DarkModeBox>
         </OtherLogin>
         <IconBox>
           <RiKakaoTalkFill color="yellow" />
-          <AiFillGoogleCircle color="white" />
+          <AiFillGoogleCircle />
           <FaFacebook color="blue" />
           <AiFillTwitterCircle color="blue" />
-          <AiFillApple color="white" />
+          <AiFillApple />
           <FontAwesomeIcon icon={faLine} color="rgb(0,200,18)" />
         </IconBox>
       </AuthLayout>
