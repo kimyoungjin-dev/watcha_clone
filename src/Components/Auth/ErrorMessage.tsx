@@ -11,5 +11,5 @@ const Text = styled.span`
 `;
 
 export default function ErrorMessage({ text }: IProps) {
-  return <Text>{text}</Text>;
+  return text === "" || !text ? null : <Text>{text}</Text>;
 }
